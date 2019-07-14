@@ -6,7 +6,6 @@ import * as yup from 'yup';
 const SignUpForm = ({
   className,
   values,
-  // touched,
   isSubmitting,
 }) => {
   return (
@@ -61,9 +60,7 @@ const SignUpForm = ({
   );
 };
 
-// Formik higher-order component + withFormik takes options object that we can provide to it
 const FormikApp = withFormik({
-  // Setting up initial values & you can access props values
   mapPropsToValues: ({ email, password, newsletter }) => ({
     email: email || '',
     password: password || '',
@@ -73,7 +70,6 @@ const FormikApp = withFormik({
   validationSchema: yup.object().shape({
     email: yup
       .string()
-      // Yup allows us to specify custom error messages
       .email('Email not valid')
       .required('Email is required'),
     password: yup
@@ -82,7 +78,6 @@ const FormikApp = withFormik({
       .max(12, 'Password can only be 12 characters')
       .required('Password is required'),
   }),
-  // What to do on form submit ( graphql request, http request etc. )
   handleSubmit: (values, { setErrors, setSubmitting, resetForm }) => {
     setTimeout(() => {
       if (values.email === 'random@test.com') {
